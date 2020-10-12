@@ -41,7 +41,7 @@ namespace Training
                     new SignUpCustomerCommand(GetCustomerDraft())
                 );
             var customer = signInResult.Customer;
-            Console.WriteLine($"Customer Created with Id : {customer.Id} and Key : {customer.Key}");
+            Console.WriteLine($"Customer Created with Id : {customer.Id} and Key : {customer.Key} and Email Verified: {customer.IsEmailVerified}");
             
             //CREATE a email verfification token
             var customerTokenResult = await _client.ExecuteAsync(
@@ -67,7 +67,8 @@ namespace Training
 
             var customer = signInResult.Customer;
             
-            Console.WriteLine($"Customer Created with Id : {customer.Id} and Key : {customer.Key}");
+            Console.WriteLine($"Customer Created with Id : {customer.Id} " +
+                              $"and Key : {customer.Key} and Email Verified {customer.IsEmailVerified}");
             
             var verifiedCustomer = await _client
                 .Builder()

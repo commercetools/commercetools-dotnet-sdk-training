@@ -101,7 +101,7 @@ namespace Training
                 DeleteDaysAfterLastModification = 90,
                 InventoryMode = InventoryMode.ReserveOnOrder
             };
-            return await _client.ExecuteAsync(new CreateCommand<Cart>(cartDraft));
+            return await _client.Builder().Carts().Create(cartDraft).ExecuteAsync();
         }
 
         /// <summary>
@@ -140,9 +140,13 @@ namespace Training
             {
                 Code = code
             };
+            return await 
+                _client.Builder().Carts().UpdateById(cart).AddAction(action).ExecuteAsync();
+            /*
             return await _client.ExecuteAsync(
                 cart.UpdateById(actions =>
                     actions.AddUpdate(action)));
+                    */
         }
 
         //Recalculate a cart
@@ -150,9 +154,12 @@ namespace Training
         {
             var action = new RecalculateUpdateAction();
 
+            return await _client.Builder().Carts().UpdateById(cart).AddAction(action).ExecuteAsync();
+            /*
             return await _client.ExecuteAsync(
                 cart.UpdateById(actions =>
                     actions.AddUpdate(action)));
+                    */
         }
 
         /// <summary>
@@ -171,9 +178,12 @@ namespace Training
                 ShippingMethod = shippingMethod?.ToReference()
             };
 
+            return await _client.Builder().Carts().UpdateById(cart).AddAction(action).ExecuteAsync();
+            /*
             return await _client.ExecuteAsync(
                 cart.UpdateById(actions =>
                     actions.AddUpdate(action)));
+                    */
         }
 
         /// <summary>
